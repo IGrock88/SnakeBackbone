@@ -1,0 +1,42 @@
+table {
+    background: #fff;
+    border: 3px solid #000000;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.error{
+    border: 1px solid #933;
+    color: #993333;
+    border-radius: 5px;
+}
+
+.info {
+    display: inline-block;
+    border: 1px solid #9EA3A3;
+    width: 100px;
+}
+
+a{
+    color: #2B3035;
+}
+
+#root{
+    margin: 0 auto;
+    width: 700px;
+}
+
+.cell{
+    width: 15px;
+    height: 15px;
+    border: 1px dotted rgba(0, 0, 0, 0.2);
+}
+
+.food{
+    background-image: url("../img/food.png");
+    background-size: contain;
+}
+
+.snake{
+    background-color: green;
+}
