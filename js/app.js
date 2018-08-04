@@ -98,8 +98,8 @@ $(function () {
                 }
                 table.append(row);
             }
-            root.append($('<button id="start">Запуск игры</button>'),
-                table, '<div id="info"><h3>Управление стрелками &#8592 &#8593 &#8594 &#8595</h3></div>');
+            root.append($('<button id="start">Запуск игры</button>'), table,
+                '<h3 id="info">Управление стрелками &#8592 &#8593 &#8594 &#8595</h3>');
         },
         respawnSnake: function () {
             this.snake = new Snake();
