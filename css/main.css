@@ -11,19 +11,18 @@ table {
     border-radius: 5px;
 }
 
-.info {
-    display: inline-block;
-    border: 1px solid #9EA3A3;
-    width: 100px;
-}
-
 a{
     color: #2B3035;
 }
 
-#root{
+.container{
     margin: 0 auto;
     width: 700px;
+    text-align: center;
+}
+
+#info{
+    margin-top: 10px;
 }
 
 .cell{
