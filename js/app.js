@@ -3,7 +3,7 @@ let FIELD_HEIGHT = 20;
 let SNAKE_START_SIZE = 4;
 let SNAKE_STEP_INTERVAL = 500;
 let FOOD_UPDATE_INTERVAL = 5000;
-let FOODS_QUANTITY = 2;
+let FOODS_QUANTITY = 1;
 let START_X_COORD = Math.floor(FIELD_WIDTH / 2);
 let START_Y_COORD = Math.floor(FIELD_HEIGHT / 2);
 let CELLS_TYPES = {
@@ -113,7 +113,7 @@ $(function () {
         moveSnake: function () {
             let snakeHead = this.snake.at(0);
             let newSnakeUnit = {};
-            switch (this.snake.direction) { // создаем новый элемент змейки в зависимости от направления движения
+            switch (this.snake.direction) {
                 case MOVE_DIRECTIONS.right: {
                     newSnakeUnit = new SnakeUnit({
                         coordX: snakeHead.get('coordX') + 1,
@@ -200,12 +200,15 @@ $(function () {
         },
         createFood: function(){
             for(let i = 0; i < FOODS_QUANTITY; i++) {
-                let coordX = getRandomInt(0, FIELD_WIDTH);
-                let coordY = getRandomInt(0, FIELD_HEIGHT);
-                let foodUnit = new FoodUnit({coordX: coordX, coordY: coordY});
-                if (!this.isSnake(foodUnit)) {
-                    this.foods.add(foodUnit);
-                }
+                let foodUnit = {};
+                do{
+                    let coordX = getRandomInt(0, FIELD_WIDTH);
+                    let coordY = getRandomInt(0, FIELD_HEIGHT);
+                    foodUnit = new FoodUnit({coordX: coordX, coordY: coordY})
+                }while(this.isSnake(foodUnit));// как только найдена свободная от змейки ячейка выходим из цикла
+
+                this.foods.add(foodUnit);
+
                 setTimeout(function () {
                     this.foods.remove(foodUnit);
                 }.bind(this), FOOD_UPDATE_INTERVAL);
