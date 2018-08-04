@@ -112,8 +112,7 @@ $(function () {
         },
         moveSnake: function () {
             var snakeHead = this.snake.at(0);
-            var snakeTail = this.snake.at(this.snake.length - 1);
-            var newSnakeUnit = '';
+            var newSnakeUnit = {};
             switch (this.snake.direction) { // создаем новый элемент змейки в зависимости от направления движения
                 case MOVE_DIRECTIONS.right: {
                     newSnakeUnit = new SnakeUnit({
@@ -146,7 +145,7 @@ $(function () {
                 }
             }
             if(!this.isFood(newSnakeUnit)){ // проверяем была ли пища в клетке, если была не удаляем хвост
-                this.snake.remove(snakeTail);
+                this.snake.pop();
             }
             else {
                 this.snakeEat(newSnakeUnit);
