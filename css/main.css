@@ -39,3 +39,8 @@ a{
 .snake{
     background-color: green;
 }
+
+#message{
+    display: none;
+    background-color: lightgreen;
+}

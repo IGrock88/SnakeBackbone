@@ -1,5 +1,4 @@
 $(function () {
-
     var Router = Backbone.Router.extend({
         routes: {
             "": 'loadIndex',
@@ -11,11 +10,16 @@ $(function () {
             new IndexView({el: '#root'});
         },
         chooseGameField: function () {
-            console.log('game');
-            game();
+            if(typeof this.game === 'undefined'){
+                this.game = game();
+            }
+            else {
+                this.game.drawField();
+            }
         },
         chooseOptionPage: function () {
             console.log('options');
+            options();
         }
     });
     window.router = new Router();

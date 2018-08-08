@@ -1,5 +1,4 @@
-function game () {
-    'use strict';
+function game(){
     let FoodUnit = Backbone.Model.extend({});
 
     let Foods = Backbone.Collection.extend({
@@ -28,6 +27,10 @@ function game () {
         }
     );
 
+    let GameMenu = Backbone.View.extend({
+
+    })
+
     let GameField = Backbone.View.extend({
         tagName: 'table',
         events: {
@@ -38,6 +41,7 @@ function game () {
             this.drawField();
         },
         startGame: function () {
+            this.isGame = true;
             this.score = 0;
             this.foods = new Foods();
             this.respawnSnake();
@@ -50,13 +54,14 @@ function game () {
             }
             this.moveInterval = setInterval(function () {
                 this.moveSnake();
-            }.bind(this), SNAKE_STEP_INTERVAL);
+            }.bind(this), snakeStepInterval);
             this.foodInterval = setInterval(function () {
                 this.createFood();
             }.bind(this), FOOD_UPDATE_INTERVAL);
         },
         drawField: function () {
             let root = $('#root');
+            root.empty();
             let table = $('<table/>');
 
             for (let y = 0; y < FIELD_WIDTH; y++) {
@@ -71,10 +76,11 @@ function game () {
                 }
                 table.append(row);
             }
-            root.append($('<button id="start">Запуск игры</button>'), table,
+            root.append($('<a href="#">Меню</a><br>'), $('<button id="start">Запуск игры</button>'), table,
                 '<h3 id="info">Управление стрелками &#8592 &#8593 &#8594 &#8595</h3>');
         },
         respawnSnake: function () {
+            console.log('respawn snake');
             this.snake = new Snake();
             for (let i = 0; i < SNAKE_START_SIZE; i++) {
                 let snakeUnit = new SnakeUnit({
@@ -87,6 +93,9 @@ function game () {
         moveSnake: function () {
             let snakeHead = this.snake.at(0);
             let newSnakeUnit = {};
+            if (this.snake.length === 0) {
+                return;
+            }
             switch (this.snake.direction) {
                 case MOVE_DIRECTIONS.right: {
                     newSnakeUnit = new SnakeUnit({
@@ -173,7 +182,7 @@ function game () {
 
         },
         createFood: function () {
-            for (let i = 0; i < FOODS_QUANTITY; i++) {
+            for (let i = 0; i < foodsQuatity; i++) {
                 let foodUnit = {};
                 do {
                     let coordX = getRandomInt(0, FIELD_WIDTH);
@@ -198,11 +207,13 @@ function game () {
             this.score++;
         },
         stopGame: function () {
+            this.isGame = false;
             clearInterval(this.moveInterval);
             clearInterval(this.foodInterval);
             this.foods.reset();
             this.snake.reset();
             alert('Game over. Score - ' + this.score);
+
         },
         renderFood: function () {
             $('.cell').removeClass('food');
@@ -222,7 +233,10 @@ function game () {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    let gameField = new GameField({el: '#root'});
+    var gameField = new GameField({el: '#root'});
+    return gameField;
 }
+
+
 
 
