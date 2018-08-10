@@ -27,10 +27,6 @@ function game(){
         }
     );
 
-    let GameMenu = Backbone.View.extend({
-
-    })
-
     let GameField = Backbone.View.extend({
         tagName: 'table',
         events: {
